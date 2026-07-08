@@ -1,52 +1,50 @@
-// This is our main function
 function fizzbuzz(): void {
+    //length of generic keyword in output
+    const WORD_LENGTH:number = 4;
+
     for (let i = 1; i <= 400; i++) {
-        let out : string = "";
+        const outList : string[] =[];
 
         if (i % 3 == 0) {
-            out += "Fizz";
+            outList.push("Fizz");
         }
 
         if (i % 5 == 0) {
-            out += "Buzz";
+            outList.push("Buzz");
         }
 
         if (i % 7 == 0) {
-            if (i % 3 == 0 || i % 5 == 0) {
-                out += "Bang";
-            } else {
-                out = "Bang";
-            }
+            outList.push("Bang");
         }
 
         if (i % 11 == 0) {
-            out = "Bong";
+            outList.length = 0;
+            outList.push("Bong");
         }
 
         if (i % 13 == 0) {
-            if (out.includes("B")) {
-                let idx : number = out.indexOf("B");
-                out = out.substring(0, idx) + "Fezz" + out.substring(idx);
-            } else {
-                out += "Fezz";
-            }
+            const index:number = outList.findIndex(message => message[0] == 'B');
+            if (index == -1)
+                outList.push("Fezz");
+            else
+                outList.splice(index, 0, "Fezz");
         }
 
+        const out : string = outList.join("");
         if (i % 17 == 0) {
-            let out2 : string = "";
-            for (let j = out.length - 4; j >= 0; j -= 4) {
-                out2 += out.substring(j, j + 4);
+            outList.length = 0;
+            for (let j = out.length - WORD_LENGTH; j >= 0; j -= 4) {
+                outList.push(out.substring(j, j + WORD_LENGTH));
             }
-            out = out2;
         }
 
         if (out == "") {
             console.log(i);
         } else {
-            console.log(out);
+            console.log(outList.join(""));
         }
 
     }
 }
-// Now, we run the main function:
+
 fizzbuzz();
